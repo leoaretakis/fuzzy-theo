@@ -1,0 +1,16 @@
+{
+  "name": "fuzzy-theo",
+  "version": "1.0.0",
+  "description": "Fuzzy set theory utility javascript library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fuzzy",
+    "fuzzy",
+    "set"
+  ],
+  "author": "Leonardo Aretakis",
+  "license": "ISC"
+}
