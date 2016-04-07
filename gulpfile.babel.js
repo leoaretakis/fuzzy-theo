@@ -3,22 +3,30 @@
 import 'babel-polyfill';
 
 import gulp from 'gulp';
-import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
 import eslint from 'gulp-eslint';
+// import babel from 'gulp-babel';
 
-gulp.task('lint', function () {
-    return gulp.src(['**/*.js','!node_modules/**'])
-      .pipe(eslint())
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
-});
+gulp.task('lint', () =>
+  gulp.src(['**/*.js', '!node_modules/**'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+);
 
-gulp.task('test', function () {
-  return gulp.src('tests/**/*.js')
-    .pipe(mocha());
-});
+gulp.task('test', () =>
+  gulp.src('tests/**/*.js')
+    .pipe(mocha())
+);
 
-gulp.task('default', ['lint'], function () {
-  console.log('gulp launched ok');
+gulp.task('watch', () =>
+  gulp.watch('**/*.js', ['lint'])
+);
+
+gulp.task('watch-test', () =>
+  gulp.watch('**/*.js', ['test'])
+);
+
+gulp.task('default', ['lint', 'test', 'watch', 'watch-test'], () => {
+  // console.log('gulp launched ok');
 });
