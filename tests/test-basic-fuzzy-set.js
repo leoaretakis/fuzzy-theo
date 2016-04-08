@@ -1,4 +1,3 @@
-import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { FuzzySet } from './..';
 
@@ -41,4 +40,8 @@ describe('Discrete test', () => {
       expect(fs.membershipGrade('London')).not.to.be.NaN;
     });
   });
+});
+
+describe('Continuos Test', () => {
+  // TODO
 });
