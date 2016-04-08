@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { FuzzySet } from './..';
 
-describe('Discrete test', () => {
+describe('Basic test', () => {
   describe('Cities you may choose to live in', () => {
     const mapMembershipGrades = {
       'San Francisco': 0.9,
