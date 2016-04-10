@@ -20,14 +20,6 @@ const fuzzyUtils = {
   isWithinStrongAlphaLevelCut(x, alpha) {
     return this.membershipGrade(x) > alpha;
   },
-
-  isNormal() {
-    // TODO there is at least one x where this.membershipGrade(x) == 1
-  },
-
-  isFuzzySingleton() {
-    // TODO there is only one x where this.membershipGrade(x) == 1, all the others grades are 0
-  },
 };
 
 for (const funName in fuzzyUtils) {

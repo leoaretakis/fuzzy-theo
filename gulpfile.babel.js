@@ -15,16 +15,16 @@ gulp.task('lint', () =>
 );
 
 gulp.task('test', () =>
-  gulp.src('tests/**/*.js')
+  gulp.src(['tests/**/*.js', , '!node_modules/**'])
     .pipe(mocha())
 );
 
 gulp.task('watch', () =>
-  gulp.watch('**/*.js', ['lint'])
+  gulp.watch(['**/*.js', '!node_modules/**'], ['lint'])
 );
 
 gulp.task('watch-test', () =>
-  gulp.watch('**/*.js', ['test'])
+  gulp.watch(['**/*.js', '!node_modules/**'], ['test'])
 );
 
 gulp.task('default', ['watch', 'watch-test'], () => {
