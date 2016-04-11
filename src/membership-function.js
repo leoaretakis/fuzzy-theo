@@ -1,7 +1,7 @@
 
 const defaultUniverseProperties = {
-  set_type: Symbol('continuous'), // continuous, discrete
-  data_type: Symbol('numeric'), // numeric(quantitative), string(qualitative)
+  set_type: null, // Symbol('continuous'), discrete
+  data_type: null, // numeric(quantitative), string(qualitative)
   set_interval: '(-Infinity, Infinity)', // [a,b] (closed), [a,b) (open-right), (a,b] (open-left), (a,b) (open)
   set: null, // [a, c, g ...]
 };
