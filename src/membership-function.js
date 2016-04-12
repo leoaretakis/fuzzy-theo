@@ -1,13 +1,13 @@
 
-const defaultUniverseProperties = {
+const defaultUniverseProps = {
   setType: null, // Symbol('continuous'), discrete
   dataType: null, // numeric(quantitative), string(qualitative)
   // setInterval: [a,b] (closed), [a,b) (open-right), (a,b] (open-left), (a,b) (open)
-  setInterval: '(-Infinity, Infinity)',
+  setInterval: null,
   set: null, // [a, c, g ...]
 };
 
-const defaultMembershipFunctionProperties = {
+const defaultMFProps = {
   func: null,
   convex: false, // f(a*x1 + (1-a)*x2) >= min(f(x1), f(x2))
   normal: false, // at least one x where this.membershipGrade(x) == 1
@@ -21,19 +21,19 @@ const defaultMembershipFunctionProperties = {
 };
 
 class MembershipFunction {
-  constructor(properties, universeProperties) {
+  constructor(properties, universeProps) {
     if (!properties || !properties.func) {
       throw new Error('Membership function within the properties is mandatory');
     }
 
-    for (const prop in defaultMembershipFunctionProperties) {
-      if (Object.prototype.hasOwnProperty.call(defaultMembershipFunctionProperties, prop)) {
+    for (const prop in defaultMFProps) {
+      if (Object.prototype.hasOwnProperty.call(defaultMFProps, prop)) {
         this[prop] = Object.prototype.hasOwnProperty.call(properties, prop)
-          ? properties[prop] : defaultMembershipFunctionProperties[prop];
+          ? properties[prop] : defaultMFProps[prop];
       }
     }
 
-    this.universeProperties = Object.assign({}, universeProperties, defaultUniverseProperties);
+    this.universe = Object.assign({}, defaultUniverseProps, universeProps);
   }
 }
 
