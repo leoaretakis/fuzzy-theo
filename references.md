@@ -17,3 +17,5 @@ http://worrydream.com/Tangle/
 https://facebook.github.io/immutable-js/
 
 https://github.com/JWally/jsLPSolver
+
+https://github.com/amokjs/amok
