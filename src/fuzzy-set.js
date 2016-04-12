@@ -7,10 +7,11 @@ function isNumeric(n) {
 
 class FuzzySet {
   constructor(membershipFun) {
-    if (typeof membershipFun === 'function')
-      this.membershipFun = new MembershipFunction(membershipFun);
-    else
+    if (typeof membershipFun === 'function') {
+      this.membershipFun = new MembershipFunction({ func: membershipFun });
+    } else {
       this.membershipFun = membershipFun;
+    }
   }
 
   membershipGrade(x) {

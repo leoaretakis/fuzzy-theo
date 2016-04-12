@@ -15,7 +15,7 @@ gulp.task('lint', () =>
 );
 
 gulp.task('test', () =>
-  gulp.src(['tests/**/*.js', , '!node_modules/**'])
+  gulp.src(['tests/**/*.js', '!node_modules/**'])
     .pipe(mocha())
 );
 
