@@ -1,4 +1,4 @@
-# Javascript Fuzzy Theory library
+# Javascript Fuzzy Set Theory library
 
 Fuzzy set theory utility javascript library
 
