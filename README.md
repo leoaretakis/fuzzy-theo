@@ -2,5 +2,6 @@
 
 Fuzzy set theory utility javascript library
 
-*Under construction*
+>*Under construction*
+>
 <img src="http://i.imgur.com/fI9qT.gif" width="48">
