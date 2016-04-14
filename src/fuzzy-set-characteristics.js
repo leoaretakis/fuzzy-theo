@@ -1,6 +1,6 @@
 const invalidCompositionError = 'Utility function not composed by a valid fuzzy set';
 
-const fuzzyUtils = {
+const fuzzySetCharacteristics = {
   isSupport(x) {
     return this.isWithinStrongAlphaLevelCut(x, 0);
   },
@@ -22,15 +22,13 @@ const fuzzyUtils = {
   },
 };
 
-for (const funName in fuzzyUtils) {
-  if ({}.hasOwnProperty.call(fuzzyUtils, funName) && typeof fuzzyUtils[funName] === 'function') {
-    const fun = fuzzyUtils[funName];
+Object.keys(fuzzySetCharacteristics).forEach((prop) => {
+  const fun = fuzzySetCharacteristics[prop];
 
-    fuzzyUtils[funName] = function wrapper(...args) {
-      if (!this.membershipGrade) throw new Error(invalidCompositionError);
-      return fun.apply(this, args);
-    };
-  }
-}
+  fuzzySetCharacteristics[prop] = function wrapper(...args) {
+    if (!this.membershipGrade) throw new Error(invalidCompositionError);
+    return fun.apply(this, args);
+  };
+});
 
-export default fuzzyUtils;
+export default fuzzySetCharacteristics;
