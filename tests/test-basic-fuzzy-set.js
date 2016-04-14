@@ -4,6 +4,16 @@ import { expect } from 'chai';
 import { FuzzySet } from './..';
 
 describe('Basic fuzzy set test', () => {
+  it('must have a mf', () => {
+    const expectedErrorMsg = 'Fuzzy set should properties must have a mf';
+    const caseOneErrorThrowingFunction = () => new FuzzySet();
+    const caseTwoErrorThrowingFunction = () => new FuzzySet({});
+    const caseThreeErrorThrowingFunction = () => new FuzzySet({ mf: null });
+    expect(caseOneErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(caseTwoErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(caseThreeErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+  });
+
   describe('Cities you may choose to live in', () => {
     const mapMembershipGrades = {
       'San Francisco': 0.9,
@@ -14,7 +24,7 @@ describe('Basic fuzzy set test', () => {
       London: 'cloudy',
     };
 
-    const fs = new FuzzySet((x) => mapMembershipGrades[x]);
+    const fs = new FuzzySet({ mf: (x) => mapMembershipGrades[x] });
 
     it('has correct membership grade for cities', () => {
       expect(fs.membershipGrade('San Francisco')).to.equal(0.9);
@@ -44,7 +54,7 @@ describe('Basic fuzzy set test', () => {
 
   describe('Universe set', () => {
     it('has all the default properties', () => {
-      const fs = new FuzzySet((x) => x);
+      const fs = new FuzzySet({ mf: (x) => x });
 
       expect(fs.universe).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
       expect(fs.universe.setType).to.be.null;
@@ -54,7 +64,7 @@ describe('Basic fuzzy set test', () => {
     });
 
     it('overrides the default properties properly', () => {
-      const fs = new FuzzySet((x) => x, {
+      const fs = new FuzzySet({ mf: (x) => x }, {
         setType: Symbol.for('discrete'),
         dataType: Symbol.for('qualitative'),
         setInterval: '(a, d)',

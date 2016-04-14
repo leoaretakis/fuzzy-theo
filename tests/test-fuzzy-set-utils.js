@@ -7,7 +7,7 @@ import { FuzzySet, FuzzySetUtils } from './..';
 FuzzySet.prototype = Object.assign(FuzzySet.prototype, FuzzySetUtils);
 
 describe('Fuzzy set member utilities test', () => {
-  const fs = new FuzzySet((x) => roundTo(Math.cos(x), 5));
+  const fs = new FuzzySet({ mf: (x) => roundTo(Math.cos(x), 5) });
   it('throws an error if not called by a valid fuzzy set', () => {
     const expectedMsg = 'Utility function not composed by a valid fuzzy set';
     Object.keys(FuzzySetUtils).forEach((key) => {

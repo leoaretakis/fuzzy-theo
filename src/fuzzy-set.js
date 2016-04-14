@@ -11,15 +11,14 @@ const defaultUniverseProps = {
 };
 
 class FuzzySet {
-  constructor(membershipFun, universeProps) {
-    if (membershipFun instanceof MembershipFunction) {
-      this.membershipFun = membershipFun;
+  constructor(props, universeProps) {
+    if (!props || !props.mf) throw new Error('Fuzzy set should properties must have a mf');
+
+    if (props.mf instanceof MembershipFunction) {
+      this.membershipFun = props.mf;
     } else {
-      this.membershipFun = new MembershipFunction(
-        (typeof membershipFun === 'function')
-          ? { func: membershipFun }
-          : membershipFun
-      );
+      const mfProps = (typeof props.mf === 'function') ? { func: props.mf } : props.mf;
+      this.membershipFun = new MembershipFunction(mfProps);
     }
 
     this.universe = Object.assign({}, defaultUniverseProps, universeProps);
