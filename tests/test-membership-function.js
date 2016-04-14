@@ -16,10 +16,11 @@ describe('Membership Function', () => {
       const mf = new MembershipFunction({ func: () => 0 });
 
       expect(mf).to.have.all.keys(
-        'func', 'convex', 'normal', 'singleton', 'crossoverPoints',
+        'func', 'dimension', 'convex', 'normal', 'singleton', 'crossoverPoints',
         'isSymmetricAroundC', 'bandwidth', 'isOpenLeft', 'isOpenRight',
         'isClosed');
       expect(mf.func).to.not.be.null;
+      expect(mf.dimension).to.equal(1);
       expect(mf.convex).to.be.false;
       expect(mf.normal).to.be.false;
       expect(mf.singleton).to.be.false;
@@ -45,6 +46,7 @@ describe('Membership Function', () => {
       });
 
       expect(mf.func).to.equal(mfFun);
+      expect(mf.dimension).to.equal(1);
       expect(mf.convex).to.be.true;
       expect(mf.normal).to.be.false;
       expect(mf.singleton).to.be.false;

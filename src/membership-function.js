@@ -1,6 +1,7 @@
 
 const defaultMFProps = {
   func: null,
+  dimension: 1, // dimension of the function
   convex: false, // f(a*x1 + (1-a)*x2) >= min(f(x1), f(x2))
   normal: false, // at least one x where this.membershipGrade(x) == 1
   singleton: false, // only one x where f(x) == 1, all the others grades are 0,
