@@ -12,10 +12,14 @@ const defaultUniverseProps = {
 
 class FuzzySet {
   constructor(membershipFun, universeProps) {
-    if (typeof membershipFun === 'function') {
-      this.membershipFun = new MembershipFunction({ func: membershipFun });
-    } else {
+    if (membershipFun instanceof MembershipFunction) {
       this.membershipFun = membershipFun;
+    } else {
+      this.membershipFun = new MembershipFunction(
+        (typeof membershipFun === 'function')
+          ? { func: membershipFun }
+          : membershipFun
+      );
     }
 
     this.universe = Object.assign({}, defaultUniverseProps, universeProps);
