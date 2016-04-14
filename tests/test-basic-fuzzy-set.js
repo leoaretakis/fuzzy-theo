@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-expressions */
+
 import { expect } from 'chai';
 import { FuzzySet } from './..';
 
-describe('Basic test', () => {
+describe('Basic fuzzy set test', () => {
   describe('Cities you may choose to live in', () => {
     const mapMembershipGrades = {
       'San Francisco': 0.9,
@@ -36,12 +38,37 @@ describe('Basic test', () => {
 
     it('has grade always as a number', () => {
       expect(fs.membershipGrade('London')).to.be.a('number');
-      // eslint-disable-next-line no-unused-expressions
       expect(fs.membershipGrade('London')).not.to.be.NaN;
+    });
+  });
+
+  describe('Universe set', () => {
+    it('has all the default properties', () => {
+      const fs = new FuzzySet((x) => x);
+
+      expect(fs.universe).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
+      expect(fs.universe.setType).to.be.null;
+      expect(fs.universe.dataType).to.be.null;
+      expect(fs.universe.setInterval).to.be.null;
+      expect(fs.universe.set).to.be.null;
+    });
+
+    it('overrides the default properties properly', () => {
+      const fs = new FuzzySet((x) => x, {
+        setType: Symbol.for('discrete'),
+        dataType: Symbol.for('qualitative'),
+        setInterval: '(a, d)',
+        set: ['a', 'b', 'c', 'd'],
+      });
+
+      expect(fs.universe.setType).to.equal(Symbol.for('discrete'));
+      expect(fs.universe.dataType).to.equal(Symbol.for('qualitative'));
+      expect(fs.universe.setInterval).to.equal('(a, d)');
+      expect(fs.universe.set).to.contain('a', 'b', 'c', 'd');
     });
   });
 });
 
-describe('Continuos Test', () => {
+describe('Continuous Test', () => {
   // TODO
 });
