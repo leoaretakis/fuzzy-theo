@@ -11,21 +11,16 @@ const defaultUniverseProps = {
 };
 
 class FuzzySet {
-  constructor(props, universeProps) {
+  constructor(props) {
     if (!props || !props.mf) throw new Error('Fuzzy set should properties must have a mf');
-
-    if (props.mf instanceof MembershipFunction) {
-      this.membershipFun = props.mf;
-    } else {
-      const mfProps = (typeof props.mf === 'function') ? { func: props.mf } : props.mf;
-      this.membershipFun = new MembershipFunction(mfProps);
-    }
-
-    this.universe = Object.assign({}, defaultUniverseProps, universeProps);
+    this.mf = (props.mf instanceof MembershipFunction)
+      ? props.mf
+    : new MembershipFunction(props.mf);
+    this.universe = Object.assign({}, defaultUniverseProps, props.universe);
   }
 
   membershipGrade(x) {
-    const grade = this.membershipFun.func(x);
+    const grade = this.mf.func(x);
     return isNumeric(grade) ? Math.min(Math.max(grade, 0), 1) : 0;
   }
 }

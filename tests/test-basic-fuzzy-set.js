@@ -24,7 +24,9 @@ describe('Basic fuzzy set test', () => {
       London: 'cloudy',
     };
 
-    const fs = new FuzzySet({ mf: (x) => mapMembershipGrades[x] });
+    const fs = new FuzzySet({
+      mf: { func: (x) => mapMembershipGrades[x] },
+    });
 
     it('has correct membership grade for cities', () => {
       expect(fs.membershipGrade('San Francisco')).to.equal(0.9);
@@ -54,7 +56,7 @@ describe('Basic fuzzy set test', () => {
 
   describe('Universe set', () => {
     it('has all the default properties', () => {
-      const fs = new FuzzySet({ mf: (x) => x });
+      const fs = new FuzzySet({ mf: { func: (x) => x } });
 
       expect(fs.universe).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
       expect(fs.universe.setType).to.be.null;
@@ -64,11 +66,14 @@ describe('Basic fuzzy set test', () => {
     });
 
     it('overrides the default properties properly', () => {
-      const fs = new FuzzySet({ mf: (x) => x }, {
-        setType: Symbol.for('discrete'),
-        dataType: Symbol.for('qualitative'),
-        setInterval: '(a, d)',
-        set: ['a', 'b', 'c', 'd'],
+      const fs = new FuzzySet({
+        mf: { func: (x) => x },
+        universe: {
+          setType: Symbol.for('discrete'),
+          dataType: Symbol.for('qualitative'),
+          setInterval: '(a, d)',
+          set: ['a', 'b', 'c', 'd'],
+        },
       });
 
       expect(fs.universe.setType).to.equal(Symbol.for('discrete'));
