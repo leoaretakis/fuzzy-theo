@@ -19,8 +19,8 @@ class FuzzySet {
     this.universe = Object.assign({}, defaultUniverseProps, props.universe);
   }
 
-  membershipGrade(x) {
-    const grade = this.mf.func(x);
+  membershipGrade(...x) {
+    const grade = this.mf.func.apply(this.mf, x);
     return isNumeric(grade) ? Math.min(Math.max(grade, 0), 1) : 0;
   }
 }

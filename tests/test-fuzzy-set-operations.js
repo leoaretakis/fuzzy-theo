@@ -12,6 +12,14 @@ describe('Fuzzy set operations', () => {
     mf: { func: () => 1.0 },
   });
 
+  describe('Merged MF properties', () => {
+    // TODO
+  });
+
+  describe('Merged Universe properties', () => {
+    // TODO
+  });
+
   describe('Union', () => {
     it('is a set with the max grade between 2 fuzzy sets', () => {
       const unionFs = FuzzySetOperations.union(fs, fs2);
@@ -41,6 +49,24 @@ describe('Fuzzy set operations', () => {
       expect(comlementFs.membershipGrade(0)).to.equal(0);
       expect(comlementFs.membershipGrade(Math.PI / 2.0)).to.equal(1);
       expect(comlementFs.membershipGrade(Math.PI)).to.equal(1);
+    });
+  });
+
+  describe('Cartesian Product', () => {
+    it('is a higher dimension set with the min grade between 2 fuzzy sets', () => {
+      const cartProdFS = FuzzySetOperations.cartesianProduct(fs, fs2);
+
+      expect(cartProdFS.membershipGrade(0, 1)).to.equal(1);
+      expect(cartProdFS.membershipGrade(Math.PI / 2.0, 0)).to.equal(0);
+    });
+  });
+
+  describe('Cartesian Co-Product', () => {
+    it('is a higher dimension set with the max grade between 2 fuzzy sets', () => {
+      const cartCoProdFS = FuzzySetOperations.cartesianCoProduct(fs, fs2);
+
+      expect(cartCoProdFS.membershipGrade(0, 1)).to.equal(1);
+      expect(cartCoProdFS.membershipGrade(Math.PI / 2.0, 0)).to.equal(1);
     });
   });
 });
