@@ -1,9 +1,8 @@
 
 import FuzzySet from './fuzzy-set';
 
-function unionMF(mf1, mf2) {
+function mergeMFProps(mf1, mf2) {
   return {
-    func: (...args) => Math.max(mf1.func.apply(this, args), mf2.func.apply(this, args)),
     dimension: Math.max(mf1.dimension, mf2.dimension),
     convex: mf1.convex && mf2.convex,
     normal: mf1.normal && mf2.normal,
@@ -11,14 +10,16 @@ function unionMF(mf1, mf2) {
   };
 }
 
+function unionMF(mf1, mf2) {
+  return Object.assign({},
+    { func: (...args) => Math.max(mf1.func.apply(this, args), mf2.func.apply(this, args)) },
+    mergeMFProps(mf1, mf2));
+}
+
 function intersectMF(mf1, mf2) {
-  return {
-    func: (...args) => Math.min(mf1.func.apply(this, args), mf2.func.apply(this, args)),
-    dimension: Math.max(mf1.dimension, mf2.dimension),
-    convex: mf1.convex && mf2.convex,
-    normal: mf1.normal && mf2.normal,
-    singleton: mf1.singleton && mf2.singleton,
-  };
+  return Object.assign({},
+    { func: (...args) => Math.min(mf1.func.apply(this, args), mf2.func.apply(this, args)) },
+    mergeMFProps(mf1, mf2));
 }
 
 function mergeSets(set1, set2, mergeMFFunc) {
@@ -52,7 +53,7 @@ const fuzzySetOperations = {
     return new FuzzySet(complementProps);
   },
 
-  cartesianProduct() {
+  cartesianProduct(fs1, fs2) {
 
   },
 
