@@ -8,5 +8,4 @@ Fuzzy set theory utility javascript library
 
 ## TODO
 
-- Refactor tests
-- Implement many sorts of MFs
+- Implement many sorts of MFs and test

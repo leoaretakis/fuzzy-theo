@@ -8,6 +8,24 @@ export const DataType = {
   qualitative: Symbol('qualitative'),
 };
 
+export const defaultNumericUnidimensionalFuzzySetProps = {
+  mf: {
+    dimension: 1,
+    convex: true,
+    normal: true,
+    singleton: false,
+    isOpenLeft: false,
+    isOpenRight: false,
+    isClosed: true,
+  },
+  universe: {
+    setType: SetType.continuous,
+    dataType: DataType.quantitative,
+    setInterval: '(-Infinity, Infinity)',
+    set: null,
+  },
+};
+
 export const defaultFuzzySetProps = {
   universe: {
     setType: null, // continuous, discrete

@@ -43,4 +43,12 @@ describe('Triangular fuzzy set', () => {
     expect(symmetricFs.mf.isSymmetricAroundC(0)).to.be.true;
     expect(symmetricFs.mf.isSymmetricAroundC(10)).to.be.false;
   });
+
+  it('throws error on invalid parameters', () => {
+    const invalidFsCreation = () => new TriangularFS(0, -10, 10);
+    const invalidFsCreation2 = () => new TriangularFS(0, 10);
+
+    expect(invalidFsCreation).to.throw(Error, 'Invalid triangle parameters');
+    expect(invalidFsCreation2).to.throw(Error);
+  });
 });
