@@ -29,3 +29,9 @@ https://www.meteor.com/tutorials/blaze/creating-an-app
 https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.vp9nt68af
 
 https://github.com/compute-io/
+
+http://bl.ocks.org/supereggbert/aff58196188816576af0
+
+http://bl.ocks.org/hlvoorhees/5986172
+
+http://visjs.org/
