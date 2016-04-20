@@ -5,13 +5,23 @@ import { FuzzySet } from './..';
 
 describe('Basic fuzzy set test', () => {
   it('must have a mf', () => {
-    const expectedErrorMsg = 'Fuzzy set should properties must have a mf';
-    const caseOneErrorThrowingFunction = () => new FuzzySet();
-    const caseTwoErrorThrowingFunction = () => new FuzzySet({});
-    const caseThreeErrorThrowingFunction = () => new FuzzySet({ mf: null });
-    expect(caseOneErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(caseTwoErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(caseThreeErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    const expectedErrorMsg = 'Fuzzy set properties must have a mf';
+    const case1ErrorThrowingFunction = () => new FuzzySet();
+    const case2ErrorThrowingFunction = () => new FuzzySet({});
+    const case3ErrorThrowingFunction = () => new FuzzySet({ mf: null });
+    const case4ErrorThrowingFunction = () => new FuzzySet({ mf: {} });
+    const case5ErrorThrowingFunction = () => new FuzzySet({ mf: { func: null } });
+    const case6ErrorThrowingFunction = () => new FuzzySet({ mf: { func: {} } });
+    const case7CorrectFunction = () => new FuzzySet({ mf: { func: () => 1 } });
+
+    expect(case1ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case2ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case3ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case4ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case5ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case5ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case6ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
+    expect(case7CorrectFunction).not.to.throw(Error, expectedErrorMsg);
   });
 
   describe('Cities you may choose to live in', () => {
