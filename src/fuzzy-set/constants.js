@@ -1,4 +1,3 @@
-
 export const SetType = {
   continuous: Symbol('continuous'),
   discrete: Symbol('discrete'),

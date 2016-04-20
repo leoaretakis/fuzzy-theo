@@ -1,3 +1,3 @@
-import fuzzy from './src/fuzzy-set';
+import FuzzySet from './src/fuzzy-set';
 
-export const FuzzySet = fuzzy;
+export { FuzzySet };
