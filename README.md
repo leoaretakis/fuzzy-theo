@@ -9,4 +9,5 @@ Fuzzy set theory utility javascript library
 ## TODO
 
 - Create enum for some MF and FS properties
+- Refactor tests
 - Implement many sorts of MFs
