@@ -17,6 +17,7 @@ class FuzzySet {
 
   membershipGrade(...x) {
     const grade = this.mf.func(...x);
+    console.log('grade', grade);
     return isNumeric(grade) ? Math.min(Math.max(grade, 0.0), 1.0) : 0.0;
   }
 }
