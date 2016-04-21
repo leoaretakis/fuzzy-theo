@@ -8,7 +8,7 @@ class GaussianFuzzySet extends FuzzySet {
       throw new Error('Invalid gaussian parameters');
     }
 
-    const temp = variance * Math.pow(-2 * Math.log(0.5), 2);
+    const temp = variance * Math.sqrt(2 * Math.log(2));
     const fsProps = {
       mf: Object.assign({}, defaultProps.mf, props.mf, {
         func: (x) => Math.exp(-0.5 * Math.pow((x - mean) / variance, 2)),

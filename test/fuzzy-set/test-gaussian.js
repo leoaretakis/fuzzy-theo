@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
+import roundTo from 'round-to';
 import { GaussianFS } from './../..';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
@@ -25,10 +26,10 @@ describe('Trapezoidal fuzzy set', () => {
   });
 
   it('has correct function values', () => {
-    expect(fs.membershipGrade(60)).to.equal(1.0);
     expect(fs.membershipGrade(50)).to.equal(1.0);
-    expect(fs.membershipGrade(10)).to.equal(0.0);
-    expect(fs.membershipGrade(30)).to.equal(0.5);
+    expect(roundTo(fs.membershipGrade(0), 2)).to.equal(0.04);
+    expect(roundTo(fs.membershipGrade(25), 2)).to.equal(0.46);
+    expect(roundTo(fs.membershipGrade(70), 2)).to.equal(0.61);
   });
 
   it('has correct crossover points', () => {
@@ -36,7 +37,7 @@ describe('Trapezoidal fuzzy set', () => {
   });
 
   it('has correct bandwidth', () => {
-    expect(fs.mf.bandwidth).to.equal(50);
+    expect(roundTo(fs.mf.bandwidth, 2)).to.equal(47.1);
   });
 
   it('has symmetry around correct point (b)', () => {
