@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { SigmoidalFS } from './../..';
+import { LeftRightFS } from './../..';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Sigmoidal fuzzy set', () => {
-  const fs = new SigmoidalFS(50, 4);
+  const fs = new LeftRightFS(65, 60, 10);
 
   it('MF has correct default properties', () => {
     expect(fs.mf.dimension).to.equal(1);
@@ -25,31 +25,33 @@ describe('Sigmoidal fuzzy set', () => {
   });
 
   it('has correct function values', () => {
-    expect(fs.membershipGrade(50)).to.equal(0.5);
+    expect(fs.membershipGrade(65)).to.equal(1.0);
     expect(Number(fs.membershipGrade(0).toFixed(2))).to.equal(0.0);
-    expect(Number(fs.membershipGrade(25).toFixed(2))).to.equal(0.0);
-    expect(Number(fs.membershipGrade(50.3).toFixed(2))).to.equal(0.77);
-    expect(Number(fs.membershipGrade(70).toFixed(2))).to.equal(1);
+    expect(Number(fs.membershipGrade(25).toFixed(2))).to.equal(0.75);
+    expect(Number(fs.membershipGrade(50.3).toFixed(2))).to.equal(0.97);
+    expect(Number(fs.membershipGrade(76).toFixed(2))).to.equal(0.26);
   });
 
   it('has correct crossover points', () => {
-    fs.mf.crossoverPoints.forEach((x) => expect(fs.membershipGrade(x)).to.equal(0.5));
+    fs.mf.crossoverPoints.forEach((x) => {
+      expect(Number(fs.membershipGrade(x).toFixed(2))).to.equal(0.5);
+    });
   });
 
   it('has correct bandwidth', () => {
-    expect(fs.mf.bandwidth).to.equal(0);
+    expect(Number(fs.mf.bandwidth.toFixed(2))).to.equal(60.81);
   });
 
   it('has symmetry around correct point (b)', () => {
-    const symmetricFs = new SigmoidalFS(10, 5);
+    const symmetricFs = new LeftRightFS(10, 5, 1);
     expect(symmetricFs.mf.isSymmetricAroundC(Math.random())).to.be.false;
   });
 
   it('throws error on invalid parameters', () => {
-    const invalidFsCreation = () => new SigmoidalFS(0);
-    const invalidFsCreation2 = () => new SigmoidalFS(0, 'as');
+    const invalidFsCreation = () => new LeftRightFS(0);
+    const invalidFsCreation2 = () => new LeftRightFS(0, 'as');
 
-    expect(invalidFsCreation).to.throw(Error, 'Invalid sigmoidal parameters');
+    expect(invalidFsCreation).to.throw(Error, 'Invalid left-right parameters');
     expect(invalidFsCreation2).to.throw(Error);
   });
 });

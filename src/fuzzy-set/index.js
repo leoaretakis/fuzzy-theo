@@ -4,6 +4,7 @@ import TrapezoidalFS from './trapezoidal';
 import GaussianFS from './gaussian';
 import BellFS from './bell';
 import SigmoidalFS from './sigmoidal';
+import LeftRightFS from './lr';
 
 export default FuzzySet;
 export {
@@ -13,4 +14,5 @@ export {
   GaussianFS,
   BellFS,
   SigmoidalFS,
+  LeftRightFS,
 };

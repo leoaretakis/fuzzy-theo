@@ -12,7 +12,7 @@ class BellFuzzySet extends FuzzySet {
     const temp = Math.pow(1, - (2 * span)) * variance;
     const fsProps = {
       mf: Object.assign({}, defaultProps.mf, props.mf, {
-        func: (x) => 1 / (1 + Math.abs( Math.pow((x - mean) / variance, 2 * span) ) ),
+        func: (x) => 1 / (1 + Math.abs(Math.pow((x - mean) / variance, 2 * span))),
         crossoverPoints: [mean - temp, mean + temp],
         bandwidth: Math.abs(2 * temp),
         isSymmetricAroundC: (cParam) => cParam === mean,
