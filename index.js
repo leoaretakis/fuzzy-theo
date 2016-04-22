@@ -1,3 +1,3 @@
-import { FuzzySet, TriangularFS, TrapezoidalFS, GaussianFS } from './src/fuzzy-set';
+import { FuzzySet, TriangularFS, TrapezoidalFS, GaussianFS, BellFS, SigmoidalFS } from './src/fuzzy-set';
 
-export { FuzzySet, TriangularFS, TrapezoidalFS, GaussianFS };
+export { FuzzySet, TriangularFS, TrapezoidalFS, GaussianFS, BellFS, SigmoidalFS };

@@ -2,11 +2,11 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { GaussianFS } from './../..';
+import { BellFS } from './../..';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
-describe('Gaussian fuzzy set', () => {
-  const fs = new GaussianFS(50, 20);
+describe('Bell fuzzy set', () => {
+  const fs = new BellFS(50, 4, 20);
 
   it('MF has correct default properties', () => {
     expect(fs.mf.dimension).to.equal(1);
@@ -27,9 +27,9 @@ describe('Gaussian fuzzy set', () => {
 
   it('has correct function values', () => {
     expect(fs.membershipGrade(50)).to.equal(1.0);
-    expect(roundTo(fs.membershipGrade(0), 2)).to.equal(0.04);
-    expect(roundTo(fs.membershipGrade(25), 2)).to.equal(0.46);
-    expect(roundTo(fs.membershipGrade(70), 2)).to.equal(0.61);
+    expect(roundTo(fs.membershipGrade(0), 2)).to.equal(0.0);
+    expect(roundTo(fs.membershipGrade(25), 2)).to.equal(0.14);
+    expect(roundTo(fs.membershipGrade(70), 2)).to.equal(0.5);
   });
 
   it('has correct crossover points', () => {
@@ -37,20 +37,20 @@ describe('Gaussian fuzzy set', () => {
   });
 
   it('has correct bandwidth', () => {
-    expect(roundTo(fs.mf.bandwidth, 2)).to.equal(47.1);
+    expect(fs.mf.bandwidth).to.equal(40);
   });
 
   it('has symmetry around correct point (b)', () => {
-    const symmetricFs = new GaussianFS(10, 5);
+    const symmetricFs = new BellFS(10, 5, 2);
     expect(symmetricFs.mf.isSymmetricAroundC(10.0)).to.be.true;
     expect(symmetricFs.mf.isSymmetricAroundC(2)).to.be.false;
   });
 
   it('throws error on invalid parameters', () => {
-    const invalidFsCreation = () => new GaussianFS(0);
-    const invalidFsCreation2 = () => new GaussianFS(0, 'as');
+    const invalidFsCreation = () => new BellFS(0);
+    const invalidFsCreation2 = () => new BellFS(0, 'as');
 
-    expect(invalidFsCreation).to.throw(Error, 'Invalid gaussian parameters');
+    expect(invalidFsCreation).to.throw(Error, 'Invalid bell parameters');
     expect(invalidFsCreation2).to.throw(Error);
   });
 });

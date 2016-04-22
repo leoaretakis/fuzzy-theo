@@ -2,11 +2,11 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { GaussianFS } from './../..';
+import { SigmoidalFS } from './../..';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
-describe('Gaussian fuzzy set', () => {
-  const fs = new GaussianFS(50, 20);
+describe('Sigmoidal fuzzy set', () => {
+  const fs = new SigmoidalFS(50, 4);
 
   it('MF has correct default properties', () => {
     expect(fs.mf.dimension).to.equal(1);
@@ -26,10 +26,12 @@ describe('Gaussian fuzzy set', () => {
   });
 
   it('has correct function values', () => {
-    expect(fs.membershipGrade(50)).to.equal(1.0);
-    expect(roundTo(fs.membershipGrade(0), 2)).to.equal(0.04);
-    expect(roundTo(fs.membershipGrade(25), 2)).to.equal(0.46);
-    expect(roundTo(fs.membershipGrade(70), 2)).to.equal(0.61);
+    console.log('fs.membershipGrade(0)', fs.membershipGrade(0));
+    expect(fs.membershipGrade(50)).to.equal(0.5);
+    expect(Number(fs.membershipGrade(0).toFixed(2))).to.equal(0.0);
+    expect(Number(fs.membershipGrade(25).toFixed(2))).to.equal(0.0);
+    expect(Number(fs.membershipGrade(50.3).toFixed(2))).to.equal(0.77);
+    expect(Number(fs.membershipGrade(70).toFixed(2))).to.equal(1);
   });
 
   it('has correct crossover points', () => {
@@ -37,20 +39,19 @@ describe('Gaussian fuzzy set', () => {
   });
 
   it('has correct bandwidth', () => {
-    expect(roundTo(fs.mf.bandwidth, 2)).to.equal(47.1);
+    expect(fs.mf.bandwidth).to.equal(0);
   });
 
   it('has symmetry around correct point (b)', () => {
-    const symmetricFs = new GaussianFS(10, 5);
-    expect(symmetricFs.mf.isSymmetricAroundC(10.0)).to.be.true;
-    expect(symmetricFs.mf.isSymmetricAroundC(2)).to.be.false;
+    const symmetricFs = new SigmoidalFS(10, 5);
+    expect(symmetricFs.mf.isSymmetricAroundC(Math.random())).to.be.false;
   });
 
   it('throws error on invalid parameters', () => {
-    const invalidFsCreation = () => new GaussianFS(0);
-    const invalidFsCreation2 = () => new GaussianFS(0, 'as');
+    const invalidFsCreation = () => new SigmoidalFS(0);
+    const invalidFsCreation2 = () => new SigmoidalFS(0, 'as');
 
-    expect(invalidFsCreation).to.throw(Error, 'Invalid gaussian parameters');
+    expect(invalidFsCreation).to.throw(Error, 'Invalid sigmoidal parameters');
     expect(invalidFsCreation2).to.throw(Error);
   });
 });
