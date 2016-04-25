@@ -27,6 +27,6 @@ gulp.task('watch-test', () =>
   gulp.watch(['**/*.js', '!node_modules/**'], ['test'])
 );
 
-gulp.task('default', ['watch', 'watch-test'], () => {
+gulp.task('default', ['test', 'lint'], () => {
   // console.log('gulp launched ok');
 });
