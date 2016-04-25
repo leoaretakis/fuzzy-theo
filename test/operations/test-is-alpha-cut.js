@@ -10,9 +10,7 @@ FuzzySet.prototype.isWithinAlphaLevelCut = function alphaLev(alpha, ...x) {
 };
 
 describe('Alpha Cut', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => roundTo(Math.cos(x), 5) },
-  });
+  const fs = new FuzzySet({ func: (x) => roundTo(Math.cos(x), 5) });
 
   it('is the set of members with grade greater than or equal an "alpha"', () => {
     expect(isWithinAlphaLevelCut(fs, 0.5, Math.acos(0.4))).to.be.false;
