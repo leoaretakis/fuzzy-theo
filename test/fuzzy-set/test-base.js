@@ -10,13 +10,13 @@ describe('Basic fuzzy set test', () => {
     const case2ErrorThrowingFunction = () => new FuzzySet({});
     const case3ErrorThrowingFunction = () => new FuzzySet({ func: null });
     const case4ErrorThrowingFunction = () => new FuzzySet({ func: {} });
-    const case5CorrectFunction = () => new FuzzySet({ mf: { func: () => 1 } });
+    const case5CorrectFunction = () => new FuzzySet({ func: () => 1 });
 
     expect(case1ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case2ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case3ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case4ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(case7CorrectFunction).not.to.throw(Error, expectedErrorMsg);
+    expect(case5CorrectFunction).not.to.throw(Error, expectedErrorMsg);
   });
 
   describe('Example: Cities you may choose to live in', () => {
@@ -59,9 +59,9 @@ describe('Basic fuzzy set test', () => {
 
   describe('Universe set', () => {
     it('has all the default properties', () => {
-      const fs = new FuzzySet({ mf: { func: (x) => x } });
+      const fs = new FuzzySet({ func: (x) => x });
 
-      expect(fs).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
+      expect(fs).to.have.any.keys('setType', 'dataType', 'setInterval', 'set');
       expect(fs.setType).to.be.null;
       expect(fs.dataType).to.be.null;
       expect(fs.setInterval).to.be.null;
@@ -88,7 +88,7 @@ describe('Basic fuzzy set test', () => {
     it('has all the default properties', () => {
       const fs = new FuzzySet({ func: () => 0 });
 
-      expect(fs).to.have.all.keys(
+      expect(fs).to.have.any.keys(
         'func', 'dimension', 'convex', 'normal', 'singleton', 'crossoverPoints',
         'isSymmetricAroundC', 'bandwidth', 'isOpenLeft', 'isOpenRight',
         'isClosed');

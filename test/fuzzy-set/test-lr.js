@@ -8,20 +8,20 @@ describe('Sigmoidal fuzzy set', () => {
   const fs = new LeftRightFS(65, 60, 10);
 
   it('MF has correct default properties', () => {
-    expect(fs.mf.dimension).to.equal(1);
-    expect(fs.mf.convex).to.be.true;
-    expect(fs.mf.normal).to.be.true;
-    expect(fs.mf.singleton).to.be.false;
-    expect(fs.mf.isOpenLeft).to.be.false;
-    expect(fs.mf.isOpenRight).to.be.false;
-    expect(fs.mf.isClosed).to.be.true;
+    expect(fs.dimension).to.equal(1);
+    expect(fs.convex).to.be.true;
+    expect(fs.normal).to.be.true;
+    expect(fs.singleton).to.be.false;
+    expect(fs.isOpenLeft).to.be.false;
+    expect(fs.isOpenRight).to.be.false;
+    expect(fs.isClosed).to.be.true;
   });
 
   it('Universe has correct default properties', () => {
-    expect(fs.universe.setType).to.equal(SetType.continuous);
-    expect(fs.universe.dataType).to.equal(DataType.quantitative);
-    expect(fs.universe.setInterval).to.equal('(-Infinity, Infinity)');
-    expect(fs.universe.set).to.be.null;
+    expect(fs.setType).to.equal(SetType.continuous);
+    expect(fs.dataType).to.equal(DataType.quantitative);
+    expect(fs.setInterval).to.equal('(-Infinity, Infinity)');
+    expect(fs.set).to.be.null;
   });
 
   it('has correct function values', () => {
@@ -33,18 +33,18 @@ describe('Sigmoidal fuzzy set', () => {
   });
 
   it('has correct crossover points', () => {
-    fs.mf.crossoverPoints.forEach((x) => {
+    fs.crossoverPoints.forEach((x) => {
       expect(Number(fs.membershipGrade(x).toFixed(2))).to.equal(0.5);
     });
   });
 
   it('has correct bandwidth', () => {
-    expect(Number(fs.mf.bandwidth.toFixed(2))).to.equal(60.81);
+    expect(Number(fs.bandwidth.toFixed(2))).to.equal(60.81);
   });
 
   it('has symmetry around correct point (b)', () => {
     const symmetricFs = new LeftRightFS(10, 5, 1);
-    expect(symmetricFs.mf.isSymmetricAroundC(Math.random())).to.be.false;
+    expect(symmetricFs.isSymmetricAroundC(Math.random())).to.be.false;
   });
 
   it('throws error on invalid parameters', () => {
