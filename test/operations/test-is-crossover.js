@@ -8,9 +8,7 @@ import isCrossover from './../../src/operations/is-crossover';
 FuzzySet.prototype.isCrossover = function cross(...x) { return isCrossover(this, ...x); };
 
 describe('Crossover point', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => roundTo(Math.cos(x), 5) },
-  });
+  const fs = new FuzzySet({ func: (x) => roundTo(Math.cos(x), 5) });
 
   it('is the set of members with grade equal 0.5', () => {
     expect(isCrossover(fs, 3)).to.be.false;

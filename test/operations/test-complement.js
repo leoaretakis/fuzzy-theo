@@ -5,9 +5,7 @@ import { FuzzySet } from './../..';
 import complement from './../../src/operations/complement';
 
 describe('Complement operation', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => Math.round(Math.cos(x)) },
-  });
+  const fs = new FuzzySet({ func: (x) => Math.round(Math.cos(x)) });
 
   it('is a set with the complement [1 - f(x)] of the current set membership function', () => {
     const comlementFs = complement(fs);

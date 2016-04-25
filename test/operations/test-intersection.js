@@ -5,13 +5,8 @@ import { FuzzySet } from './../..';
 import intersection from './../../src/operations/intersection';
 
 describe('Intersection operation', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => Math.round(Math.cos(x)) },
-  });
-
-  const fs2 = new FuzzySet({
-    mf: { func: () => 1.0 },
-  });
+  const fs = new FuzzySet({ func: (x) => Math.round(Math.cos(x)) });
+  const fs2 = new FuzzySet({ func: () => 1.0 });
 
   it('is a set with the min grade between 2 fuzzy sets', () => {
     const intersectionFS = intersection(fs, fs2);
