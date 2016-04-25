@@ -1,8 +1,7 @@
 
-import { mergedSetProps, mergeMFSingleParam } from './helpers';
+import { mergeFuzzySetProps } from './helpers';
 import FuzzySet from './../fuzzy-set';
 
 export default function intersection(...fsList) {
-  const props = mergedSetProps(mergeMFSingleParam.bind(null, Math.min), ...fsList);
-  return new FuzzySet(props);
+  return new FuzzySet(mergeFuzzySetProps(Math.min, false, ...fsList));
 }
