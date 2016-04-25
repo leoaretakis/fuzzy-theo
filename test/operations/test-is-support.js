@@ -8,9 +8,7 @@ import isSupport from './../../src/operations/is-support';
 FuzzySet.prototype.isSupport = function support(...x) { return isSupport(this, ...x); };
 
 describe('Suppport', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => roundTo(Math.cos(x), 5) },
-  });
+  const fs = new FuzzySet({ func: (x) => roundTo(Math.cos(x), 5) });
 
   it('is the set of members with grade greater than 0', () => {
     expect(isSupport(fs, 0)).to.be.true;
