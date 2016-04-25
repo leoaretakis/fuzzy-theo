@@ -5,13 +5,8 @@ import { FuzzySet } from './../..';
 import union from './../../src/operations/union';
 
 describe('Union operation', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => Math.round(Math.cos(x)) },
-  });
-
-  const fs2 = new FuzzySet({
-    mf: { func: () => 1.0 },
-  });
+  const fs = new FuzzySet({ func: (x) => Math.round(Math.cos(x)) });
+  const fs2 = new FuzzySet({ func: () => 1.0 });
 
   it('is a set with the max grade between 2 fuzzy sets', () => {
     const unionFs = union(fs, fs2);
