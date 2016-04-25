@@ -1,13 +1,13 @@
 
 import FuzzySet from './../fuzzy-set';
-import { mergedSetProps, mergeMFMultiParam } from './helpers';
+import { mergeFuzzySetProps } from './helpers';
 
 export function cartesianProduct(...fsList) {
-  const props = mergedSetProps(mergeMFMultiParam.bind(null, Math.min), ...fsList);
+  const props = mergeFuzzySetProps(Math.min, true, ...fsList);
   return new FuzzySet(props);
 }
 
 export function cartesianCoProduct(...fsList) {
-  const props = mergedSetProps(mergeMFMultiParam.bind(null, Math.max), ...fsList);
+  const props = mergeFuzzySetProps(Math.max, true, ...fsList);
   return new FuzzySet(props);
 }

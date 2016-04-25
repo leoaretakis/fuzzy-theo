@@ -8,19 +8,14 @@ describe('Basic fuzzy set test', () => {
     const expectedErrorMsg = 'Fuzzy set properties must have a mf';
     const case1ErrorThrowingFunction = () => new FuzzySet();
     const case2ErrorThrowingFunction = () => new FuzzySet({});
-    const case3ErrorThrowingFunction = () => new FuzzySet({ mf: null });
-    const case4ErrorThrowingFunction = () => new FuzzySet({ mf: {} });
-    const case5ErrorThrowingFunction = () => new FuzzySet({ mf: { func: null } });
-    const case6ErrorThrowingFunction = () => new FuzzySet({ mf: { func: {} } });
-    const case7CorrectFunction = () => new FuzzySet({ mf: { func: () => 1 } });
+    const case3ErrorThrowingFunction = () => new FuzzySet({ func: null });
+    const case4ErrorThrowingFunction = () => new FuzzySet({ func: {} });
+    const case5CorrectFunction = () => new FuzzySet({ mf: { func: () => 1 } });
 
     expect(case1ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case2ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case3ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case4ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(case5ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(case5ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
-    expect(case6ErrorThrowingFunction).to.throw(Error, expectedErrorMsg);
     expect(case7CorrectFunction).not.to.throw(Error, expectedErrorMsg);
   });
 
@@ -34,9 +29,7 @@ describe('Basic fuzzy set test', () => {
       London: 'cloudy',
     };
 
-    const fs = new FuzzySet({
-      mf: { func: (x) => mapMembershipGrades[x] },
-    });
+    const fs = new FuzzySet({ func: (x) => mapMembershipGrades[x] });
 
     it('has correct membership grade for cities', () => {
       expect(fs.membershipGrade('San Francisco')).to.equal(0.9);
@@ -68,78 +61,74 @@ describe('Basic fuzzy set test', () => {
     it('has all the default properties', () => {
       const fs = new FuzzySet({ mf: { func: (x) => x } });
 
-      expect(fs.universe).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
-      expect(fs.universe.setType).to.be.null;
-      expect(fs.universe.dataType).to.be.null;
-      expect(fs.universe.setInterval).to.be.null;
-      expect(fs.universe.set).to.be.null;
+      expect(fs).to.have.all.keys('setType', 'dataType', 'setInterval', 'set');
+      expect(fs.setType).to.be.null;
+      expect(fs.dataType).to.be.null;
+      expect(fs.setInterval).to.be.null;
+      expect(fs.set).to.be.null;
     });
 
     it('overrides the default properties properly', () => {
       const fs = new FuzzySet({
-        mf: { func: (x) => x },
-        universe: {
-          setType: Symbol.for('discrete'),
-          dataType: Symbol.for('qualitative'),
-          setInterval: '(a, d)',
-          set: ['a', 'b', 'c', 'd'],
-        },
+        func: (x) => x,
+        setType: Symbol.for('discrete'),
+        dataType: Symbol.for('qualitative'),
+        setInterval: '(a, d)',
+        set: ['a', 'b', 'c', 'd'],
       });
 
-      expect(fs.universe.setType).to.equal(Symbol.for('discrete'));
-      expect(fs.universe.dataType).to.equal(Symbol.for('qualitative'));
-      expect(fs.universe.setInterval).to.equal('(a, d)');
-      expect(fs.universe.set).to.contain('a', 'b', 'c', 'd');
+      expect(fs.setType).to.equal(Symbol.for('discrete'));
+      expect(fs.dataType).to.equal(Symbol.for('qualitative'));
+      expect(fs.setInterval).to.equal('(a, d)');
+      expect(fs.set).to.contain('a', 'b', 'c', 'd');
     });
   });
 
   describe('Membership Function', () => {
     it('has all the default properties', () => {
-      const fs = new FuzzySet({ mf: { func: () => 0 } });
+      const fs = new FuzzySet({ func: () => 0 });
 
-      expect(fs.mf).to.have.all.keys(
+      expect(fs).to.have.all.keys(
         'func', 'dimension', 'convex', 'normal', 'singleton', 'crossoverPoints',
         'isSymmetricAroundC', 'bandwidth', 'isOpenLeft', 'isOpenRight',
         'isClosed');
-      expect(fs.mf.func).to.not.be.null;
-      expect(fs.mf.dimension).to.equal(1);
-      expect(fs.mf.convex).to.be.false;
-      expect(fs.mf.normal).to.be.false;
-      expect(fs.mf.singleton).to.be.false;
-      expect(fs.mf.crossoverPoints).to.be.empty;
-      expect(fs.mf.isSymmetricAroundC).to.be.a('function');
-      expect(fs.mf.bandwidth).to.equal(0);
-      expect(fs.mf.isOpenLeft).to.be.false;
-      expect(fs.mf.isOpenRight).to.be.false;
-      expect(fs.mf.isClosed).to.be.false;
+      expect(fs.func).to.not.be.null;
+      expect(fs.dimension).to.equal(1);
+      expect(fs.convex).to.be.false;
+      expect(fs.normal).to.be.false;
+      expect(fs.singleton).to.be.false;
+      expect(fs.crossoverPoints).to.be.empty;
+      expect(fs.isSymmetricAroundC).to.be.a('function');
+      expect(fs.bandwidth).to.equal(0);
+      expect(fs.isOpenLeft).to.be.false;
+      expect(fs.isOpenRight).to.be.false;
+      expect(fs.isClosed).to.be.false;
     });
 
     it('overrides the default properties properly', () => {
       const mfFun = (a) => a;
       const symFun = (a) => a;
       const fs = new FuzzySet({
-        mf: {
-          func: mfFun,
-          convex: true,
-          normal: false,
-          singleton: false,
-          crossoverPoints: [3, 10],
-          isSymmetricAroundC: symFun,
-          bandwidth: 7,
-        },
+        func: mfFun,
+        convex: true,
+        normal: false,
+        singleton: false,
+        crossoverPoints: [3, 10],
+        isSymmetricAroundC: symFun,
+        bandwidth: 7,
       });
 
-      expect(fs.mf.func).to.equal(mfFun);
-      expect(fs.mf.dimension).to.equal(1);
-      expect(fs.mf.convex).to.be.true;
-      expect(fs.mf.normal).to.be.false;
-      expect(fs.mf.singleton).to.be.false;
-      expect(fs.mf.crossoverPoints).to.deep.equal([3, 10]);
-      expect(fs.mf.isSymmetricAroundC).to.equal(symFun);
-      expect(fs.mf.bandwidth).to.equal(7);
-      expect(fs.mf.isOpenLeft).to.be.false;
-      expect(fs.mf.isOpenRight).to.be.false;
-      expect(fs.mf.isClosed).to.be.false;
+      expect(fs.func).to.equal(mfFun);
+      expect(fs.dimension).to.equal(1);
+      expect(fs.convex).to.be.true;
+      expect(fs.normal).to.be.false;
+      expect(fs.singleton).to.be.false;
+      expect(fs.crossoverPoints).to.deep.equal([3, 10]);
+      expect(fs.isSymmetricAroundC).to.equal(symFun);
+      expect(fs.bandwidth).to.equal(7);
+      expect(fs.isOpenLeft).to.be.false;
+      expect(fs.isOpenRight).to.be.false;
+      expect(fs.isClosed).to.be.false;
     });
   });
 });

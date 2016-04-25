@@ -5,13 +5,8 @@ import { FuzzySet } from './../..';
 import { cartesianProduct, cartesianCoProduct } from './../../src/operations/cartesian-product';
 
 describe('Product operations', () => {
-  const fs = new FuzzySet({
-    mf: { func: (x) => Math.round(Math.cos(x)) },
-  });
-
-  const fs2 = new FuzzySet({
-    mf: { func: () => 1.0 },
-  });
+  const fs = new FuzzySet({ func: (x) => Math.round(Math.cos(x)) });
+  const fs2 = new FuzzySet({ func: () => 1.0 });
 
   describe('Cartesian Product', () => {
     it('is a higher dimension set with the min grade between 2 fuzzy sets', () => {
