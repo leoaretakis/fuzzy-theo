@@ -23,14 +23,15 @@ const files = {
   tests: path.join(dirs.testRoot, '/**/*.js'),
   source: path.join(dirs.sourceRoot, '/**/*.js'),
   allJs: path.join(__dirname, '/**/*.js'),
+  entryPoint: 'index.js',
 };
 
 gulp.task('clean-coverage', (cb) => del([dirs.coverageRoot, 'html-report/'], cb));
 
-gulp.task('test-coverage', (cb) => {
+gulp.task('test-coverage', ['clean-coverage'], (cb) => {
   const coverageDir = dirs.coverageRoot;
 
-  gulp.src([files.source, ...excludedFiles])
+  gulp.src([files.source, files.entryPoint, ...excludedFiles])
     .pipe(istanbul({ instrumenter: Instrumenter, includeUntested: true }))
     .pipe(istanbul.hookRequire()) // Force `require` to return covered files
     .on('finish', () => {
