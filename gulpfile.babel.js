@@ -37,6 +37,12 @@ gulp.task('test-coverage', ['clean-coverage'], (cb) => {
     .on('finish', () => {
       gulp.src([files.tests, ...excludedFiles], { read: false })
         .pipe(mocha({ reporter: 'spec' }))
+        .on('error', (err) => {
+          // TODO: in the future remove this and put gulp-plumber
+          // eslint-disable-next-line no-console
+          console.log('error', err);
+          process.exit(1);
+        })
         .pipe(istanbul.writeReports({
           dir: coverageDir,
           reportOpts: { dir: coverageDir },
