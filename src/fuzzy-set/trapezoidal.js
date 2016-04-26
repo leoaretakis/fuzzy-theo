@@ -1,13 +1,13 @@
 import FuzzySet from './base';
-import { defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
+import { validateNumericParams,
+        defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
+
+const invalidParamErrorMsg = 'Invalid trapezoid parameters';
 
 class TriangularFuzzySet extends FuzzySet {
   constructor(a, b, c, d, props = {}) {
-    if (typeof(a) !== 'number'
-        || typeof(b) !== 'number'
-        || typeof(c) !== 'number'
-        || typeof(d) !== 'number'
-        || a > b || b > c || c > d) throw new Error('Invalid trapezoid parameters');
+    validateNumericParams(invalidParamErrorMsg, a, b, c, d);
+    if (a > b || b > c || c > d) throw new Error(invalidParamErrorMsg);
 
     const fsProps = Object.assign({}, defaultProps, props, {
       func: (x) => Math.max(Math.min((x - a) / (b - a), 1.0, (d - x) / (d - c)), 0.0),

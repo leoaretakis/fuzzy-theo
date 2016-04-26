@@ -1,12 +1,10 @@
 import FuzzySet from './base';
-import { defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
+import { validateNumericParams,
+        defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
 
 class GaussianFuzzySet extends FuzzySet {
   constructor(mean, variance, props = {}) {
-    if (typeof(mean) !== 'number'
-        || typeof(variance) !== 'number') {
-      throw new Error('Invalid gaussian parameters');
-    }
+    validateNumericParams('Invalid gaussian parameters', mean, variance);
 
     const temp = variance * Math.sqrt(2 * Math.log(2));
     const fsProps = Object.assign({}, defaultProps, props, {
