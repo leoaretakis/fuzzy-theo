@@ -1,13 +1,10 @@
 import FuzzySet from './base';
-import { defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
+import { validateNumericParams,
+        defaultNumericUnidimensionalFuzzySetProps as defaultProps } from './constants';
 
 class BellFuzzySet extends FuzzySet {
   constructor(mean, span, variance, props = {}) {
-    if (typeof(mean) !== 'number'
-        || typeof(variance) !== 'number'
-        || typeof(span) !== 'number') {
-      throw new Error('Invalid bell parameters');
-    }
+    validateNumericParams('Invalid bell parameters', mean, variance, span);
 
     const temp = Math.pow(1, - (2 * span)) * variance;
     const fsProps = Object.assign({}, defaultProps, props, {

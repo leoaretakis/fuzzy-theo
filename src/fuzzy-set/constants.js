@@ -40,3 +40,10 @@ export const defaultFuzzySetProps = {
   setInterval: null,
   set: null, // [a, c, g ...]
 };
+
+export function validateNumericParams(errorMsg, ...params) {
+  params.forEach((p) => {
+    if (typeof p !== 'number') throw new Error(errorMsg);
+  });
+  return true;
+}
