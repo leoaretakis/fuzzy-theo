@@ -40,7 +40,7 @@ gulp.task('test-coverage', ['clean-coverage'], (cb) => {
         .pipe(istanbul.writeReports({
           dir: coverageDir,
           reportOpts: { dir: coverageDir },
-          reporters: ['text', 'text-summary', 'json', 'html'],
+          reporters: ['text', 'text-summary', 'json', 'html', 'lcov'],
         }))
         .pipe(coverageEnforcer({
           thresholds: {
