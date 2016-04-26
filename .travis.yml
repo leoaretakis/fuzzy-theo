@@ -5,3 +5,6 @@ node_js:
 before_script:
   - npm install -g gulp
 script: gulp
+addons:
+  code_climate:
+    repo_token: 235840f0b04b4d409e19e4ba854e235e7b2a3fdfb862dad444676e72884a7cfb
