@@ -76,6 +76,6 @@ gulp.task('watch-test', () =>
   gulp.watch([files.allJs, ...excludedFiles], ['test'])
 );
 
-gulp.task('default', ['test', 'lint', 'test-coverage'], () => {
+gulp.task('default', ['lint', 'test-coverage'], () => {
   // console.log('gulp launched ok');
 });
