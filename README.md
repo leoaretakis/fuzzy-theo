@@ -112,4 +112,5 @@ $ open ./coverage/lcov-report/index.html
 * Add bignumber.js
 * Bind operations to FuzzySet
 * Implement more FS types
+* Create a decent documentation
 * Create gh-pages with examples
