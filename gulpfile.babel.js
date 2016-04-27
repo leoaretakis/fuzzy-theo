@@ -10,6 +10,7 @@ import { Instrumenter } from 'isparta';
 import plumber from 'gulp-plumber';
 import del from 'del';
 import path from 'path';
+import { spawn } from 'child_process';
 
 
 const excludedFiles = ['!node_modules/**', '!coverage/**', '!html-report/**'];
@@ -78,5 +79,21 @@ gulp.task('watch', () =>
 gulp.task('watch-test', () =>
   gulp.watch([files.allJs, ...excludedFiles], ['test'])
 );
+
+gulp.task('npm-patch', (done) => {
+  spawn('npm', ['version', 'patch'], { stdio: 'inherit' })
+    .on('close', () => {
+      spawn('npm', ['publish'], { stdio: 'inherit' })
+        .on('close', done);
+    });
+});
+
+gulp.task('npm-minor', (done) => {
+  spawn('npm', ['version', 'minor'], { stdio: 'inherit' })
+    .on('close', () => {
+      spawn('npm', ['publish'], { stdio: 'inherit' })
+        .on('close', done);
+    });
+});
 
 gulp.task('default', ['lint', 'test-coverage']);
