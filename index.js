@@ -1,5 +1,6 @@
 import * as allFS from './src/fuzzy-set';
 
+export default allFS.FuzzySet;
 export const FuzzySet = allFS.FuzzySet;
 export const TriangularFS = allFS.TriangularFS;
 export const TrapezoidalFS = allFS.TrapezoidalFS;
