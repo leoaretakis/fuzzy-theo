@@ -101,6 +101,8 @@ To see the coverage results, open the generated report in your browser:
 
 
 ### 1.0.0
+
 * Add bignumber.js
 * Bind operations to FuzzySet
 * Implement more FS types
+* Create gh-pages with examples
