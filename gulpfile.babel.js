@@ -88,12 +88,4 @@ gulp.task('npm-patch', (done) => {
     });
 });
 
-gulp.task('npm-minor', (done) => {
-  spawn('npm', ['version', 'minor'], { stdio: 'inherit' })
-    .on('close', () => {
-      spawn('npm', ['publish'], { stdio: 'inherit' })
-        .on('close', done);
-    });
-});
-
 gulp.task('default', ['lint', 'test-coverage']);
