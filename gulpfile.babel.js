@@ -79,4 +79,4 @@ gulp.task('watch-test', () =>
   gulp.watch([files.allJs, ...excludedFiles], ['test'])
 );
 
-gulp.task('default', ['lint', 'test-coverage'], () => {});
+gulp.task('default', ['lint', 'test-coverage']);
