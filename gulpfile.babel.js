@@ -8,6 +8,7 @@ import coverageEnforcer from 'gulp-istanbul-enforcer';
 import istanbul from 'gulp-istanbul';
 import { Instrumenter } from 'isparta';
 import plumber from 'gulp-plumber';
+import codacy from 'gulp-codacy';
 import del from 'del';
 import path from 'path';
 import { spawn } from 'child_process';
@@ -28,11 +29,26 @@ const files = {
   entryPoint: 'index.js',
 };
 
-gulp.task('clean-coverage', (cb) => del([dirs.coverageRoot, 'html-report/'], cb));
+const istanbulCovReportConfig = {
+  dir: dirs.coverageRoot,
+  reportOpts: { dir: dirs.coverageRoot },
+  reporters: ['text', 'text-summary', 'json', 'html', 'lcov'],
+};
 
-gulp.task('test-coverage', ['clean-coverage'], (cb) => {
-  const coverageDir = dirs.coverageRoot;
+const coverageEnforceConfig = {
+  thresholds: {
+    statements: 80,
+    branches: 50,
+    lines: 80,
+    functions: 50,
+  },
+  coverageDirectory: dirs.coverageRoot,
+  rootDirectory: '',
+};
 
+gulp.task('clean-coverage', (done) => del([dirs.coverageRoot, 'html-report/'], done));
+
+gulp.task('test-coverage', ['clean-coverage'], (done) => {
   gulp.src([files.source, files.entryPoint, ...excludedFiles])
     .pipe(istanbul({ instrumenter: Instrumenter, includeUntested: true }))
     .pipe(istanbul.hookRequire()) // Force `require` to return covered files
@@ -40,23 +56,14 @@ gulp.task('test-coverage', ['clean-coverage'], (cb) => {
       gulp.src([files.tests, ...excludedFiles], { read: false })
         .pipe(plumber())
         .pipe(mocha({ reporter: 'spec' }))
-        .pipe(istanbul.writeReports({
-          dir: coverageDir,
-          reportOpts: { dir: coverageDir },
-          reporters: ['text', 'text-summary', 'json', 'html', 'lcov'],
-        }))
-        .pipe(coverageEnforcer({
-          thresholds: {
-            statements: 80,
-            branches: 50,
-            lines: 80,
-            functions: 50,
-          },
-          coverageDirectory: coverageDir,
-          rootDirectory: '',
-        }))
+        .pipe(istanbul.writeReports(istanbulCovReportConfig))
+        .pipe(coverageEnforcer(coverageEnforceConfig))
         .pipe(plumber.stop())
-        .on('end', cb);
+        .on('finish', () => {
+          gulp.src(['./coverage/lcov.info'])
+            .pipe(codacy({ token: process.env.CODACY_PROJECT_TOKEN }))
+            .on('end', done);
+        });
     });
 });
 
