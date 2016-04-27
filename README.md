@@ -80,21 +80,28 @@ const fs = new TriangularFS(20, 60, 80); // Triangle shaped fuzzy-set
 
 To execute tests for the library, install the project dependencies once:
 
-    npm install
-    npm install -g gulp
+```sh
+$ npm install
+$ npm install -g gulp
+```
 
 Then, the tests can be executed with:
 
-    gulp test
+```sh
+$ gulp test
+```
 
 To test code coverage of the tests:
 
-    npm test-coverage
+```sh
+$ npm test-coverage
+```
 
 To see the coverage results, open the generated report in your browser:
 
-    ./coverage/lcov-report/index.html
-
+```sh
+$ open ./coverage/lcov-report/index.html
+```
 
 
 ## Roadmap
