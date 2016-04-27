@@ -7,6 +7,7 @@ import eslint from 'gulp-eslint';
 import coverageEnforcer from 'gulp-istanbul-enforcer';
 import istanbul from 'gulp-istanbul';
 import { Instrumenter } from 'isparta';
+import plumber from 'gulp-plumber';
 import del from 'del';
 import path from 'path';
 
@@ -36,13 +37,8 @@ gulp.task('test-coverage', ['clean-coverage'], (cb) => {
     .pipe(istanbul.hookRequire()) // Force `require` to return covered files
     .on('finish', () => {
       gulp.src([files.tests, ...excludedFiles], { read: false })
+        .pipe(plumber())
         .pipe(mocha({ reporter: 'spec' }))
-        .on('error', (err) => {
-          // TODO: in the future remove this and put gulp-plumber
-          // eslint-disable-next-line no-console
-          console.log('error', err);
-          process.exit(1);
-        })
         .pipe(istanbul.writeReports({
           dir: coverageDir,
           reportOpts: { dir: coverageDir },
@@ -58,6 +54,7 @@ gulp.task('test-coverage', ['clean-coverage'], (cb) => {
           coverageDirectory: coverageDir,
           rootDirectory: '',
         }))
+        .pipe(plumber.stop())
         .on('end', cb);
     });
 });
@@ -82,6 +79,4 @@ gulp.task('watch-test', () =>
   gulp.watch([files.allJs, ...excludedFiles], ['test'])
 );
 
-gulp.task('default', ['lint', 'test-coverage'], () => {
-  // console.log('gulp launched ok');
-});
+gulp.task('default', ['lint', 'test-coverage']);
