@@ -9,7 +9,7 @@
 
 > Fuzzy-theo is a fuzzy-set theory utility javascript library
 
-This library is based on the readings of the book: _Neuro-Fuzzy and Soft Computing: A Computational Approach to Learning and Machine Intelligence_, by J.-S. R. Jang, C.-T. Sun, E. Mizutani ([See the book](http://www.amazon.com/Neuro-Fuzzy-Soft-Computing-Computational-Intelligence/dp/0132610663))
+This library is written in Javascript ES6 and it is based on the readings of the book: _Neuro-Fuzzy and Soft Computing: A Computational Approach to Learning and Machine Intelligence_, by J.-S. R. Jang, C.-T. Sun, E. Mizutani ([See the book](http://www.amazon.com/Neuro-Fuzzy-Soft-Computing-Computational-Intelligence/dp/0132610663))
 
 ## Installation
 
