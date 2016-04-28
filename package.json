@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack --progress --colors",
-    "dev": "webpack-dev-server --hot --watch"
+    "dev": "webpack-dev-server --host 0.0.0.0 --port 3000 --hot --watch"
   },
   "repository": {
     "type": "git",

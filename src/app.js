@@ -3,8 +3,8 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 
-// import reducer from './reducers';
-// import App from './components/App';
+import reducer from './reducers';
+import App from './components/App';
 
 function storeState({ getState }) {
   return (next) => (action) => {
@@ -15,18 +15,16 @@ function storeState({ getState }) {
 }
 
 const store = createStore(
-  //reducer,
-  () => {},
+  reducer,
   window.top.state,
   applyMiddleware(storeState)
 );
 
 export function attach(uidocument) {
   render((
-    <div>Init</div>
-    // <Provider store={store}>
-    //   <App/>
-    // </Provider>
+    <Provider store={store}>
+      <App/>
+    </Provider>
   ), uidocument.getElementById('root'));
 }
 
