@@ -6,15 +6,9 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case ActionTypes.COUNTER_INCREMENT:
+    case ActionTypes.CHANGE_PAGE:
       return Object.assign({}, state, {
-        currentPage: 'triangle',
-        counter: state.counter + 1
-      });
-    case ActionTypes.COUNTER_DECREMENT:
-      return Object.assign({}, state, {
-        currentPage: 'triangle',
-        counter: state.counter - 1
+        currentPage: action.page
       });
     default:
       return state;
