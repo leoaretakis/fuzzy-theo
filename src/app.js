@@ -8,9 +8,9 @@ import App from './components/App';
 
 function storeState({ getState }) {
   return (next) => (action) => {
-    let returnValue = next(action);
-    window.top.state = getState();
-    return returnValue;
+      let returnValue = next(action);
+      window.top.state = getState();
+      return returnValue;
   };
 }
 

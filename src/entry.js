@@ -8,15 +8,12 @@ coreInit({
 });
 
 require('webpack/hot/dev-server')
-require('webpack-dev-server/client?http://0.0.0.0:3000')
+require('webpack-dev-server/client?http://0.0.0.0:8080')
 
-module.hot.accept('./app.js', function() {
-  loadCore({
-    scriptURL: 'bundle.js'
-  }).then(function(core) {
-    core.launchCore();
-  }, function(core) {
-    console.error(`core #${core.id} failed to load: ${core.type} error`)
-    core.destroyCore();
-  });
+module.hot.accept('./app.js', () => {
+  loadCore({ scriptURL: 'bundle.js' })
+    .then((core) => core.launchCore(), (core) => {
+      console.error(`core #${core.id} failed to load: ${core.type} error`)
+      core.destroyCore();
+    });
 });
