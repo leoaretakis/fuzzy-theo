@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changePage } from '../actions'
+import { changePage } from '../actions/actions'
 import Link from './Link'
 
 const mapStateToProps = (state, ownProps) => {
