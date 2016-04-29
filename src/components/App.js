@@ -6,7 +6,7 @@ import MainMenu from './MainMenu';
 const App = () => (
   <div>
     <PageHeader />
-    <section>
+    <section className="main-content">
       <MainMenu />
       <MainContent />
     </section>

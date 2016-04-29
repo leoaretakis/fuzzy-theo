@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
 const initialState = {
-  currentPage: 'triangle'
+  currentPage: 'InitialPage'
 };
 
 export default function reducer(state = initialState, action) {
