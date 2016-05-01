@@ -1,17 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import InitialPage from './pages/InitialPage';
-
-const Pages = {
-  InitialPage
-}
 
 const MainContent = ({ currentPage }) => {
-  return (
-    <section>
-      { Pages[currentPage]() }
-    </section>
-  );
+  const Page = require(`./pages/${currentPage}`);
+  return Page.default({ test: 'oi' });
 }
 
 export default connect(

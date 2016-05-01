@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/leoaretakis/fuzzy-theo#readme",
   "dependencies": {
+    "fuzzy-theo": "^0.1.40",
     "isolated-core": "^0.1.1",
     "react": "^0.14.7",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1"
