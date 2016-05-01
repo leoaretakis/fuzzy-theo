@@ -27,8 +27,7 @@ const dirs = {
 const files = {
   tests: path.join(dirs.testRoot, '/**/*.js'),
   source: path.join(dirs.sourceRoot, '/**/*.js'),
-  allJs: path.join(__dirname, '/**/*.js'),
-  entryPoint: 'index.js',
+  entryPoint: path.join(dirs.sourceRoot, 'index.js'),
 };
 
 const istanbulCovReportConfig = {
@@ -69,15 +68,17 @@ gulp.task('test-coverage', ['clean-coverage'], (done) => gulp
       .pipe(coverageEnforcer(coverageEnforceConfig))
       .pipe(plumber.stop())
       .on('finish', () => {
-        gulp.src(['./coverage/lcov.info'])
-          .pipe(codacy({ token: process.env.CODACY_PROJECT_TOKEN }))
-          .on('end', done);
+        if (process.env.CODACY_PROJECT_TOKEN) {
+          gulp.src(['./coverage/lcov.info'])
+            .pipe(codacy({ token: process.env.CODACY_PROJECT_TOKEN }))
+            .on('end', done);
+        }
       });
   })
 );
 
 gulp.task('lint', () =>
-  gulp.src([files.allJs, ...excludedFiles])
+  gulp.src([files.source, files.tests, ...excludedFiles])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -89,11 +90,11 @@ gulp.task('test', () =>
 );
 
 gulp.task('watch', () =>
-  gulp.watch([files.allJs, ...excludedFiles], ['lint'])
+  gulp.watch([files.source, files.tests, ...excludedFiles], ['lint'])
 );
 
 gulp.task('watch-test', () =>
-  gulp.watch([files.allJs, ...excludedFiles], ['test'])
+  gulp.watch([files.source, files.tests, ...excludedFiles], ['test'])
 );
 
 gulp.task('npm-patch', (done) => {
