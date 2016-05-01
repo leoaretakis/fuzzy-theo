@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { FuzzySet } from './../..';
+import { FuzzySet } from './../../src';
 import isCore from './../../src/operations/is-core';
 
 FuzzySet.prototype.isCore = function core(...x) { return isCore(this, ...x); };

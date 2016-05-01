@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { FuzzySet } from './../..';
+import { FuzzySet } from './../../src';
 import isSupport from './../../src/operations/is-support';
 
 FuzzySet.prototype.isSupport = function support(...x) { return isSupport(this, ...x); };

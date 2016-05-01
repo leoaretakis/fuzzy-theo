@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { FuzzySet } from './../..';
+import { FuzzySet } from './../../src';
 
 describe('Basic fuzzy set test', () => {
   it('must have a mf', () => {

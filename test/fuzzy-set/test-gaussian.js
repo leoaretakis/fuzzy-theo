@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { GaussianFS } from './../..';
+import { GaussianFS } from './../../src';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Gaussian fuzzy set', () => {

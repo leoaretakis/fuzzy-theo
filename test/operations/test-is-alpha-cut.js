@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import roundTo from 'round-to';
-import { FuzzySet } from './../..';
+import { FuzzySet } from './../../src';
 import isWithinAlphaLevelCut from './../../src/operations/is-alpha-cut';
 
 FuzzySet.prototype.isWithinAlphaLevelCut = function alphaLev(alpha, ...x) {

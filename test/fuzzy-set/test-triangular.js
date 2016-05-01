@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { TriangularFS } from './../..';
+import { TriangularFS } from './../../src';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Triangular fuzzy set', () => {

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { FuzzySet } from './../..';
+import { FuzzySet } from './../../src';
 import { cartesianProduct, cartesianCoProduct } from './../../src/operations/cartesian-product';
 
 describe('Product operations', () => {

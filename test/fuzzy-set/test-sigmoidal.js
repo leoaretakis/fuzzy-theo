@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { SigmoidalFS } from './../..';
+import { SigmoidalFS } from './../../src';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Sigmoidal fuzzy set', () => {

@@ -1,4 +1,4 @@
-import * as allFS from './src/fuzzy-set';
+import * as allFS from './fuzzy-set';
 
 export default allFS.FuzzySet;
 export const FuzzySet = allFS.FuzzySet;

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { TrapezoidalFS } from './../..';
+import { TrapezoidalFS } from './../../src';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Trapezoidal fuzzy set', () => {

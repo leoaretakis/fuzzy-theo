@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { expect } from 'chai';
-import { LeftRightFS } from './../..';
+import { LeftRightFS } from './../../src';
 import { SetType, DataType } from './../../src/fuzzy-set/constants';
 
 describe('Sigmoidal fuzzy set', () => {
