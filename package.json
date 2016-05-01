@@ -1,9 +1,11 @@
 {
   "name": "fuzzy-theo",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "description": "Fuzzy set theory utility javascript library",
   "main": "lib/index.js",
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "test": "gulp test",
     "prepublish": "gulp build"
