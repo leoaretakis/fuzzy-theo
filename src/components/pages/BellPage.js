@@ -1,12 +1,12 @@
 import React from 'react';
 import { LineChart } from 'react-d3-basic';
-import { TrapezoidalFS } from 'fuzzy-theo';
+import { BellFS } from 'fuzzy-theo';
 
-const TrapezoidPage = () => {
-  const fs = new TrapezoidalFS(20, 40, 60, 80);
+const BellPage = () => {
+  const fs = new BellFS(50, 4, 20);
 
   const chartData = [];
-  for (let i = 0; i <= 100; i = i + 5) {
+  for (let i = 0; i <= 100; i = i + 1) {
     chartData.push({ x: i, y: fs.membershipGrade(i) });
   }
 
@@ -26,4 +26,4 @@ const TrapezoidPage = () => {
   );
 };
 
-export default TrapezoidPage;
+export default BellPage;

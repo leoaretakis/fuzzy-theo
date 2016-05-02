@@ -7,8 +7,8 @@ coreInit({
   }
 });
 
-require('webpack/hot/dev-server')
-require('webpack-dev-server/client?http://0.0.0.0:8080')
+require('webpack/hot/dev-server');
+require('webpack-dev-server/client?http://0.0.0.0:3000');
 
 module.hot.accept('./app.js', () => {
   loadCore({ scriptURL: 'bundle.js' })

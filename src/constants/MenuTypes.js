@@ -10,5 +10,21 @@ export default [
   {
     title: 'Trapezoid Example',
     page: 'TrapezoidPage'
+  },
+  {
+    title: 'Gaussian Example',
+    page: 'GaussianPage'
+  },
+  {
+    title: 'Bell Example',
+    page: 'BellPage'
+  },
+  {
+    title: 'Sigmoidal Example',
+    page: 'SigmoidalPage'
+  },
+  {
+    title: 'LR Example',
+    page: 'LRPage'
   }
 ];

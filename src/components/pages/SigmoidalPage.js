@@ -1,12 +1,12 @@
 import React from 'react';
 import { LineChart } from 'react-d3-basic';
-import { TrapezoidalFS } from 'fuzzy-theo';
+import { SigmoidalFS } from 'fuzzy-theo';
 
-const TrapezoidPage = () => {
-  const fs = new TrapezoidalFS(20, 40, 60, 80);
+const SigmoidalPage = () => {
+  const fs = new SigmoidalFS(50, 1);
 
   const chartData = [];
-  for (let i = 0; i <= 100; i = i + 5) {
+  for (let i = 0; i <= 100; i = i + 1) {
     chartData.push({ x: i, y: fs.membershipGrade(i) });
   }
 
@@ -26,4 +26,4 @@ const TrapezoidPage = () => {
   );
 };
 
-export default TrapezoidPage;
+export default SigmoidalPage;

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress --colors",
     "dev": "webpack-dev-server --hot --watch",
-    "dev2": "webpack-dev-server --host 0.0.0.0 --port 3000 --hot --watch"
+    "dev2": "PORT=3000 webpack-dev-server --host 0.0.0.0 --port 3000 --hot --watch"
   },
   "repository": {
     "type": "git",
