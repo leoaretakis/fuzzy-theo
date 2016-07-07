@@ -30,10 +30,10 @@ import FuzzySet from 'fuzzy-theo';
 const mapMembershipGrades = {
   'San Francisco': 0.9,
   'Los Angeles': 0.6,
-  Boston: 0.8,
-  Amsterdam: 100,
-  Chennai: -100,
-  London: 'cloudy',
+  'Boston': 0.8,
+  'Amsterdam': 100,
+  'Chennai': -100,
+  'London': 'cloudy',
 };
 const fsDiscrete = new FuzzySet({ func: (x) => mapMembershipGrades[x] });
 
